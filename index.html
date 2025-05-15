@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semillero de Investigación</title>
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Encabezado */
+        header {
+            background-color: #407922;
+            color: #0a0a0a;
+            padding: 20px 0;
+        }
+        
+        header h1 {
+            margin: 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo {
+            width: 200px;  /* Aumentamos de 150px a 200px */
+            height: auto;
+            margin-right: 20px;
+        }
+        
+        .header-text {
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: #609742;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        nav ul li a {
+            color: #080808;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #1abc9c;
+        }
+        
+        /* Contenido principal */
+        main {
+            padding: 20px 0;
+        }
+        
+        .noticias {
+            margin-bottom: 30px;
+        }
+        
+        .noticia {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .noticia h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .noticia .fecha {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .noticia-contenido {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .noticia-imagen {
+            flex: 0 0 200px;
+        }
+        
+        .noticia-imagen img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .noticia-texto {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        /* Contenido expandible */
+        .contenido-expandible {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #1abc9c;
+            border-radius: 4px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .boton-expandir {
+            display: inline-block;
+            color: #1abc9c;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .boton-expandir:hover {
+            text-decoration: underline;
+        }
+        
+        /* Imágenes en general */
+        img {
+            max-width: 100%;
+        }
+        
+        /* Barra lateral */
+        aside {
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        aside h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        /* Pie de página */
+        footer {
+            background-color: #407922; /*#338033*/
+            color: #0c0c0c;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+        
+        /* Diseño responsive */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+        
+        /* Estilos para la sección "Acerca de" */
+        .acerca {
+            margin-bottom: 30px;
+        }
+        
+        .seccion-info {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .seccion-info h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .acerca-contenido {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .acerca-imagen {
+            flex: 0 0 300px;
+        }
+        
+        .acerca-imagen img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .acerca-texto {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        /* Estilos para sección Proyectos */
+        .proyectos {
+            margin-bottom: 30px;
+        }
+        
+        .proyecto {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .proyecto h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .proyecto-contenido {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .proyecto-imagen {
+            flex: 0 0 300px;
+        }
+        
+        .proyecto-imagen img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .proyecto-texto {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .proyecto-estado {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .estado-activo {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .estado-completado {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .estado-planificado {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        /* Estilos para sección de Contacto */
+        .contacto {
+            margin-bottom: 30px;
+        }
+        
+        .info-contacto {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .info-contacto h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .info-contacto p {
+            margin-bottom: 10px;
+        }
+        
+        .info-contacto i {
+            margin-right: 10px;
+            color: #0ad20a;
+        }
+        
+        .redes-sociales {
+            margin-top: 15px;
+        }
+        
+        .redes-sociales a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #0ad20a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .redes-sociales a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Estilos para sección de Eventos */
+        .eventos {
+            margin-bottom: 30px;
+        }
+        
+        .info-eventos {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .info-eventos h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .evento {
+            display: flex;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .evento:last-child {
+            border-bottom: none;
+        }
+        
+        .evento-fecha {
+            flex: 0 0 170px;
+            padding-right: 15px;
+            color: #0ad20a;
+            font-size: 1.1em;
+        }
+        
+        .evento-fecha i {
+            margin-right: 8px;
+        }
+        
+        .evento-detalle {
+            flex: 1;
+        }
+        
+        .evento-detalle h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .evento-detalle p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .evento-detalle p:first-of-type {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .ver-mas-eventos {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .boton-eventos {
+            display: inline-block;
+            background-color: #0ad20a;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .boton-eventos:hover {
+            background-color: #089f08;
+        }
+        
+        .boton-eventos i {
+            margin-right: 8px;
+        }
+        
+        /* Estilos responsive para eventos */
+        @media (max-width: 768px) {
+            .evento {
+                flex-direction: column;
+            }
+            
+            .evento-fecha {
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* Estilos responsive para las secciones */
+        @media (max-width: 768px) {
+            .acerca-contenido,
+            .proyecto-contenido {
+                flex-direction: column;
+            }
+            
+            .acerca-imagen,
+            .proyecto-imagen {
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Estilo para la firma en el pie de página */
+        .firma {
+            text-align: center;
+            color: #bbb;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .firma-imagen {
+           height: 100px; /* Ajusta la altura */
+           margin-top: 5px; /* Agrega espacio superior si es necesario */
+        /* Otras propiedades de estilo que desees: margin-left, float, etc. */
+        }
+
+        .firma p {
+           margin-bottom: 5px; /* Agrega espacio debajo del texto si es necesario */
+        }
+        .descargas-noticia {
+           background-color: #f8f9fa;
+           padding: 15px;
+           margin-top: 20px;
+           border-top: 1px solid #eee;
+        }
+
+        .descargas-noticia h4 {
+           margin-top: 0;
+           color: #333;
+           font-size: 1.2em;
+        }
+
+        .descargas-noticia ul {
+           list-style: none;
+           padding: 0;
+        }
+
+        .descargas-noticia li {
+            margin-bottom: 10px;
+        }
+
+        .descargas-noticia a {
+           color: #0ad20a;
+           text-decoration: none;
+           font-weight: bold;
+        }
+
+        .descargas-noticia a:hover {
+           text-decoration: underline;
+        }
+
+        .descargas-noticia i {
+           margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="img/logo.png" alt="Logo del Semillero" class="logo">
+                <div class="header-text">
+                    <h1>Semillero de Investigación</h1>
+                    <p>Universidad de Sucre - Facultad de Educación y Ciencias</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#noticias">Noticias</a></li>
+                <li><a href="#acerca">Acerca de</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <section class="noticias" id="noticias">
+                <h2>Últimas Noticias</h2>
+                
+                <article class="noticia">
+                    <div class="noticia-contenido">
+                        <div class="noticia-imagen">
+                            <img src="img/proyecto.png" alt="Imagen del proyecto">
+                        </div>
+                        <div class="noticia-texto">
+                            <h3>Nuestros proyectos</h3>
+                            <div class="fecha">10 de mayo, 2025</div>
+                            <p>Nos complace anunciar que nuestro proyecto "Análisis de factores ambientales en ecosistemas urbanos" ha sido aprobado con financiación completa. El equipo comenzará las actividades el próximo mes.</p>
+                            <div class="contenido-expandible" id="proyectos-info" style="display: none;">
+                                <h4>Detalles del proyecto:</h4>
+                                <p>Este proyecto tiene como objetivo principal evaluar el impacto de factores ambientales urbanos en la biodiversidad local, con especial énfasis en especies indicadoras. La investigación se llevará a cabo en tres fases:</p>
+                                <ol>
+                                    <li><strong>Fase 1:</strong> Muestreo y recolección de datos en cinco zonas urbanas diferentes.</li>
+                                    <li><strong>Fase 2:</strong> Análisis de laboratorio y procesamiento de muestras para identificación taxonómica.</li>
+                                    <li><strong>Fase 3:</strong> Modelamiento estadístico y análisis de correlaciones entre variables ambientales y biodiversidad.</li>
+                                </ol>
+                                <p>El proyecto cuenta con la participación de 12 investigadores, incluyendo 4 estudiantes de pregrado y 2 de maestría.</p>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('proyectos-info'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="noticia">
+                    <div class="noticia-contenido">
+                        <div class="noticia-imagen">
+                            <img src="img/trabajos.png" alt="Imagen del proyecto">
+                        </div>
+                        <div class="noticia-texto">
+                            <h3>Trabajos de grados aceptados</h3>
+                            <div class="fecha">10 de mayo, 2025</div>
+                            <p>En el semillero de Evolución y sistematica tropical contamos con los trabajos ya aceptados de: </p>
+                            <div class="contenido-expandible" id="trabajos-grado" style="display: none;">
+                                <ul>
+                                    <li><strong>Sarimar Hernandez</strong> - "EL EFECTO DE LA PERTURBACIÓN ANTRÓPICA SOBRE LA ESTRUCTURA DE LAS COMUNIDADES DE AVES DEL BOSQUE SECO TROPICAL (MONTES DE MARÍA)"</li>
+                                    <li><strong>Laura Puertas</strong> - "#"</li>
+                                    <li><strong>Estefanny Rico</strong> - "REPRESENTATIVIDAD DE LAS ÁREAS PROTEGIDAS ANTE ESCENARIOS DE CAMBIO CLIMÁTICO PARA CINCO ESPECIES NEOTROPICALES DE CAPPARACEAE EN SUDAMÉRICA"</li>
+                                    <li><strong>Jorge Ramos</strong> - "REEVALUANDO LOS LÍMITES DEL BOSQUE SECO TROPICAL EN COLOMBIA BAJO UNA PERSPECTIVA AUTOECOLÓGICA USANDO A LAS AVES Y LAS PLANTAS COMO UN PROXI"</li>
+                                </ul>
+                                <p>Todos estos trabajos cuentan con el apoyo del equipo investigador y acceso a los laboratorios especializados de la facultad.</p>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('trabajos-grado'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="noticia">
+                    <div class="noticia-contenido">
+                        <div class="noticia-imagen">
+                            <img src="img/trabajos.png" alt="Imagen del proyecto">
+                        </div>
+                        <div class="noticia-texto">
+                            <h3>Diversidad de aves en el campus de la Universidad de Sucre: un patrimonio natural en observación</h3>
+                            <div class="fecha">10 de mayo, 2025</div>
+                            <p>Desde el semillero EVOLSISTROP nos interesamos por las especies con las que contamos en el campus:</p>
+                            <div class="contenido-expandible" id="aves-info" style="display: none;">
+                        <p>
+                    El campus principal de la Universidad de Sucre, ubicado en Sincelejo, alberga una notable diversidad de aves que lo convierte en un escenario valioso para la observación y el estudio de la biodiversidad urbana. A pesar de su entorno intervenido, este espacio ofrece hábitats funcionales que permiten la presencia de especies residentes, migratorias y transitorias. Reconocer y documentar esta avifauna no solo aporta al conocimiento ecológico local, sino que también promueve la integración de la conservación en los entornos educativos. La caracterización preliminar de esta comunidad de aves constituye un paso fundamental para futuras investigaciones en ecología urbana, monitoreo ambiental y educación ambiental en la región Caribe.
+                        </p>
+                    </div>
+                    <a href="#" class="boton-expandir" onclick="toggleContenido('aves-info'); return false;">Leer más</a>
+                </div>
+            </div>
+            <div class="descargas-noticia">
+                <h4>Descargar Documentos</h4>
+                <p>
+                    Aquí puedes ver todas las especies de aves del campus.
+                </p>
+                <ul>
+                    <li>
+                        <a href="documentos/aves.pdf" download>
+                            <i class="fas fa-file-pdf"></i> Avifauna de Unisucre
+                    (PDF)
+                        </a>
+                    </li>
+                    <li>
+                        /*<a href="documentos/datos-muestreo.csv" download>
+                            <!-- <i class="fas fa-file-csv"></i> Datos de Muestreo (CSV)* -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </article>    
+                    
+                
+                <article class="noticia">
+                    <h3>Convocatoria para nuevos integrantes</h3>
+                    <div class="fecha">10 de mayo, 2025</div>
+                    <p>Estamos buscando estudiantes interesados en unirse a nuestro semillero de investigación. Las inscripciones estarán abiertas hasta el 30 de mayo. Se requiere interés en metodologías de investigación y disponibilidad de 6 horas semanales.</p>
+                    <div class="contenido-expandible" id="convocatoria-info" style="display: none;">
+                        <h4>Requisitos para aplicar:</h4>
+                        <ul>
+                            <li>Ser estudiante activo de la Universidad de Sucre</li>
+                            <li>Estar minimo curzando cuarto semestre de la carrera</li>
+                            <li>Interés demostrable en líneas de investigación del semillero</li>
+                            <li>Disponibilidad mínima de 2 horas semanales</li>
+                        </ul>
+                        <h4>Proceso de selección:</h4>
+                        <ol>
+                            <li>Manifestar tu interes por participar a alguno de los miembros del semillero</li>
+                            <li>Entrevista con el comité de selección</li>
+                            <li>Presentación de una propuesta de investigación breve (máximo 2 páginas)</li>
+                        </ol>
+                        <p>Para más información, puedes asistir a las reuniones de semilleros que se organizan todo los miercoles a las 17:00</p>
+                    </div>
+                    <a href="#" class="boton-expandir" onclick="toggleContenido('convocatoria-info'); return false;">Leer más</a>
+                </article>
+                
+                <article class="noticia">
+                    <h3>Participación en congreso y simposios</h3>
+                    <div class="fecha">10 de mayo, 2025</div>
+                    <p>Tres de nuestros miembros presentaron ponencias en el Congreso Internacional de Investigación Científica celebrado en Buenos Aires. Las presentaciones fueron recibidas con gran interés por la comunidad académica.</p>
+                    <div class="contenido-expandible" id="congreso-info" style="display: none;">
+                        <h4>Ponencias presentadas:</h4>
+                        <ul>
+                            <li><strong>Dr. Fernando Ramírez:</strong> "Avances en la investigación de biodiversidad tropical en ecosistemas alterados"</li>
+                            <li><strong>Mg. Lucía Mendoza:</strong> "Metodologías innovadoras para el monitoreo de especies en peligro de extinción"</li>
+                            <li><strong>Est. Javier Morales:</strong> "Aplicación de tecnologías GIS para el mapeo de distribución de especies endémicas"</li>
+                        </ul>
+                        <p>La ponencia del estudiante Javier Morales recibió mención especial como mejor trabajo presentado por un estudiante de pregrado, lo que representa un importante reconocimiento internacional para nuestro semillero.</p>
+                        <p>Las memorias del congreso serán publicadas en la revista "Journal of Tropical Research" en la edición de julio 2025.</p>
+                    </div>
+                    <a href="#" class="boton-expandir" onclick="toggleContenido('congreso-info'); return false;">Leer más</a>
+                </article>
+            </section>
+            
+            <!-- SECCIÓN: ACERCA DE -->
+            <section class="acerca" id="acerca">
+                <h2>Acerca de</h2>
+                
+                <article class="seccion-info">
+                    <h3>¿Quiénes somos?</h3>
+                    <div class="acerca-contenido">
+                        <div class="acerca-imagen">
+                            <img src="img/logo.png" alt="Equipo del Semillero">
+                        </div>
+                        <div class="acerca-texto">
+                            <p>El Semillero de Investigación en Evolución y Sistemática Tropical de la Universidad de Sucre es una comunidad académica conformada por estudiantes y docentes apasionados por el estudio, comprensión y conservación de la biodiversidad en ecosistemas tropicales, con un énfasis especial en el Caribe colombiano y los Bosques Secos Tropicales.</p>
+                            <p>Desde su creación en 2013, el Grupo de Investigación en Evolución y Sistemática Tropical ha consolidado una trayectoria en el estudio de la biodiversidad del trópico. En este contexto, el semillero de investigación surge como un espacio formativo para estudiantes interesados en fortalecer sus capacidades científicas mediante la participación activa en proyectos que abordan los procesos evolutivos, ecológicos y biogeográficos que moldean la diversidad biológica. Nuestro trabajo también se orienta a la implementación de estrategias concretas para la conservación de especies y ecosistemas, especialmente en escenarios amenazados como el Caribe colombiano y los Bosques Secos Tropicales.</p>
+                            <p>Nuestra misión es generar y difundir conocimiento científico de alta calidad sobre la biodiversidad tropical, impulsando la conservación de especies y ecosistemas mediante investigaciones rigurosas y la formación de nuevos investigadores con pensamiento crítico, compromiso ambiental y ética profesional.</p>
+
+                            <p><strong><em>"Creemos firmemente que comprender el origen de la vida y sus conexiones con los ecosistemas actuales es el primer paso para proteger nuestro futuro."</em></strong> <br>– Jorge Ramos</p>
+                            
+                            <div class="contenido-expandible" id="quienes-somos-info" style="display: none;">
+                                <h4>Nuestros objetivos:</h4>
+                                <ul>
+                                    <li>Desarrollar investigaciones interdisciplinarias que permitan conocer la biodiversidad, historia evolutiva, patrones de distribución, conservación, clasificación e historias filogenéticas de las especies en el trópico, con especial interés en la región del Caribe colombiano</li>
+                                    <li>Implementación y manejo de las colecciones biológicas en fauna y flora del trópico, con un enfoque en el Caribe.</li>
+                                    <li>Contribuir al mejoramiento y posicionamiento de la alta calidad en investigación y educación a nivel de pregrado y posgrado en la Universidad de Sucre, con la implementación de proyectos que amplíen el conocimiento biológico en la región. </li>
+                                    <li>Fortalecer las líneas de investigación en evolución, sistemática, taxonomía, biogeografía y conservación en el Caribe colombiano, de tal forma que sea posible resolver los problemas que enfrenta la biodiversidad en esta región.</li>
+                                </ul>
+                                <h4>Líneas de Investigación:</h4>
+                                <ol>
+                                    <li>Biogeografía</li>
+                                    <li>Biogeografía Evolutiva</li>
+                                    <li>Conservación biológica</li>
+                                    <li>Ecología de Poblaciones y Comunidades</li>
+                                    <li>Ecología vegetal</li>
+                                    <li>Etnobotánica y productos Naturales</li>
+                                    <li>Evolucion</li>
+                                    <li>Sistemática biológica</li>
+                                </ol>
+                                
+                                <h4>Equipo coordinador:</h4>
+                                <ul>
+                                    <li><strong>Dr. Jorge Mercado Gómez</strong> - Líder del Grupo de Investigación</li>
+                                    <li><strong>Mg. Hernando Gómez Franklin</strong> - Director/Coordinador del semillero</li> 
+                                    <li><strong>Est. Jorge Ramos</strong></li>
+                                </ul>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('quienes-somos-info'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!-- FIN DE SECCIÓN: ACERCA DE -->
+
+            <!-- SECCIÓN: PROYECTOS -->
+            <section class="proyectos" id="proyectos">
+                <h2>Proyectos</h2>
+                
+                <article class="proyecto">
+                    <h3>Análisis de factores ambientales en ecosistemas urbanos</h3>
+                    <div class="proyecto-contenido">
+                        <div class="proyecto-imagen">
+                            <img src="img/proyecto.png" alt="Proyecto de ecosistemas urbanos">
+                        </div>
+                        <div class="proyecto-texto">
+                            <span class="proyecto-estado estado-activo">Activo</span>
+                            <p>Este proyecto tiene como objetivo principal evaluar el impacto de factores ambientales urbanos en la biodiversidad local, con especial énfasis en especies indicadoras de la calidad ambiental en las ciudades del Caribe colombiano.</p>
+                            <p>La investigación se enfoca en entender cómo los organismos se adaptan a los cambios ambientales en entornos urbanos, proporcionando información valiosa para la planificación urbana sostenible y la conservación de la biodiversidad.</p>
+                            <div class="contenido-expandible" id="proyecto1-info" style="display: none;">
+                                <h4>Metodología:</h4>
+                                <ol>
+                                    <li><strong>Fase 1:</strong> Muestreo y recolección de datos en cinco zonas urbanas diferentes de la región del Caribe.</li>
+                                    <li><strong>Fase 2:</strong> Análisis de laboratorio y procesamiento de muestras para identificación taxonómica.</li>
+                                    <li><strong>Fase 3:</strong> Modelamiento estadístico y análisis de correlaciones entre variables ambientales y biodiversidad.</li>
+                                </ol>
+                                <h4>Equipo de investigación:</h4>
+                                <ul>
+                                    <li>Investigador principal: Dr. Jorge Mercado Gómez</li>
+                                    <li>Co-investigadores: Mg. Hernando Gómez Franklin, Dra. Ana María Vargas</li>
+                                    <li>Estudiantes de pregrado: 4</li>
+                                    <li>Estudiantes de posgrado: 2</li>
+                                </ul>
+                                <h4>Financiación:</h4>
+                                <p>Este proyecto cuenta con financiación de la Universidad de Sucre y del Ministerio de Ciencia, Tecnología e Innovación de Colombia.</p>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('proyecto1-info'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="proyecto">
+                    <h3>Sistemática molecular de anfibios en ecosistemas fragmentados</h3>
+                    <div class="proyecto-contenido">
+                        <div class="proyecto-imagen">
+                            <img src="img/trabajos.png" alt="Proyecto de anfibios">
+                        </div>
+                        <div class="proyecto-texto">
+                            <span class="proyecto-estado estado-completado">Completado</span>
+                            <p>Este proyecto investigó la diversidad genética y las relaciones filogenéticas de especies de anfibios en bosques secos tropicales fragmentados del Caribe colombiano, con el fin de comprender los efectos de la fragmentación del hábitat en la estructura genética de las poblaciones.</p>
+                            <p>Los resultados de esta investigación han sido fundamentales para establecer estrategias de conservación en la región, especialmente para especies endémicas y amenazadas.</p>
+                            <div class="contenido-expandible" id="proyecto2-info" style="display: none;">
+                                <h4>Principales hallazgos:</h4>
+                                <ul>
+                                    <li>Identificación de tres nuevas especies de anfibios previamente no descritas.</li>
+                                    <li>Evidencia de disminución significativa en la diversidad genética en poblaciones de áreas altamente fragmentadas.</li>
+                                    <li>Establecimiento de corredores biológicos potenciales para la conservación de la conectividad genética entre poblaciones.</li>
+                                </ul>
+                                <h4>Publicaciones resultantes:</h4>
+                                <ul>
+                                    <li>Mercado J., Gómez H., Pérez J. (2024). "Amphibian genetic diversity in fragmented tropical dry forests of the Colombian Caribbean". Journal of Tropical Biodiversity, 45(2), 123-142.</li>
+                                    <li>Pérez J., Mercado J. (2024). "Three new species of frogs (Anura: Craugastoridae) from the Colombian Caribbean". Zootaxa, 5028(1), 56-78.</li>
+                                </ul>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('proyecto2-info'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="proyecto">
+                    <h3>Biogeografía y conservación de especies arbóreas en bosques secos tropicales</h3>
+                    <div class="proyecto-contenido">
+                        <div class="proyecto-imagen">
+                            <img src="img/proyecto.png" alt="Proyecto de bosques secos">
+                        </div>
+                        <div class="proyecto-texto">
+                            <span class="proyecto-estado estado-planificado">Planificado</span>
+                            <p>Este proyecto busca analizar los patrones de distribución y las relaciones filogenéticas de especies arbóreas en los bosques secos tropicales del Caribe colombiano, con el fin de desarrollar estrategias efectivas para su conservación.</p>
+                            <p>La investigación incluye el análisis de datos históricos, trabajo de campo para inventariar la diversidad actual, y el uso de herramientas moleculares para establecer las relaciones evolutivas entre especies.</p>
+                            <div class="contenido-expandible" id="proyecto3-info" style="display: none;">
+                                <h4>Objetivos específicos:</h4>
+                                <ul>
+                                    <li>Determinar los patrones de distribución histórica y actual de especies arbóreas en bosques secos tropicales del Caribe colombiano.</li>
+                                    <li>Establecer las relaciones filogenéticas entre las principales familias de árboles presentes en estos ecosistemas.</li>
+                                    <li>Identificar áreas prioritarias para la conservación basadas en criterios de endemismo, diversidad filogenética y vulnerabilidad.</li>
+                                    <li>Desarrollar recomendaciones para la restauración ecológica de áreas degradadas.</li>
+                                </ul>
+                                <h4>Fecha de inicio prevista:</h4>
+                                <p>Agosto 2025</p>
+                                <h4>Duración estimada:</h4>
+                                <p>36 meses</p>
+                            </div>
+                            <a href="#" class="boton-expandir" onclick="toggleContenido('proyecto3-info'); return false;">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!-- FIN SECCIÓN: PROYECTOS -->
+            
+            <!-- SECCIÓN: EVENTOS -->
+            <section class="eventos" id="eventos">
+                <h2>Próximos Eventos</h2>
+                
+                <div class="info-eventos">
+                    <h3>Calendario de Actividades</h3>
+                    
+                    <div class="evento">
+                        <div class="evento-fecha">
+                            <i class="fas fa-calendar"></i> 18 de mayo, 2025
+                        </div>
+                        <div class="evento-detalle">
+                            <h4>Taller de Métodos de Investigación en Campo</h4>
+                            <p>Auditorio Principal, 9:00 AM - 1:00 PM</p>
+                            <p>Taller práctico sobre metodologías de recolección de datos en campo, dirigido a estudiantes de pregrado y nuevos miembros del semillero. El taller incluirá demostraciones prácticas de las técnicas más utilizadas en estudios de biodiversidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="evento">
+                        <div class="evento-fecha">
+                            <i class="fas fa-calendar"></i> 5 de junio, 2025
+                        </div>
+                        <div class="evento-detalle">
+                            <h4>Simposio sobre Biodiversidad del Caribe Colombiano</h4>
+                            <p>Centro de Convenciones, 8:00 AM - 5:00 PM</p>
+                            <p>Evento académico que reunirá a investigadores locales y nacionales para discutir los últimos avances en el conocimiento de la biodiversidad del Caribe colombiano. El simposio incluirá presentaciones orales, sesiones de póster y mesas redondas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="evento">
+                        <div class="evento-fecha">
+                            <i class="fas fa-calendar"></i> 20 de junio, 2025
+                        </div>
+                        <div class="evento-detalle">
+                            <h4>Salida de Campo a Montes de María</h4>
+                            <p>Punto de encuentro: Facultad de Ciencias, 6:00 AM</p>
+                            <p>Jornada de campo para la recolección de datos en el marco del proyecto "Análisis de factores ambientales en ecosistemas urbanos". La actividad está dirigida a miembros activos del semillero y estudiantes interesados en participar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="evento">
+                        <div class="evento-fecha">
+                            <i class="fas fa-calendar"></i> 14 de mayo, 2025
+                        </div>
+                        <div class="evento-detalle">
+                            <h4>Seminario de Avances de Investigación</h4>
+                            <p>Sala de Conferencias, Biblioteca Central, 17:00 PM - 18:00 PM</p>
+                            <p>Espacio para que los miembros del semillero presenten los avances de sus proyectos de investigación. Se contará con la participación de evaluadores externos que brindarán retroalimentación a los presentadores.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ver-mas-eventos">
+                        <a href="#" class="boton-eventos"><i class="fas fa-calendar-alt"></i> Ver calendario completo</a>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN SECCIÓN: EVENTOS -->
+            
+            <!-- SECCIÓN: CONTACTO -->
+            <section class="contacto" id="contacto">
+                <h2>Contacto</h2>
+                
+                <div class="info-contacto">
+                    <h3>¡Comunícate con nosotros!</h3>
+                    
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> Universidad de Sucre, Carrera 28 #5-267, Sincelejo, Sucre, Colombia</p>
+                    <p><i class="fas fa-phone"></i> <strong>Teléfono:</strong> +57 (605) 821-5630 Ext. 128</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> semillero.evosistrop@unisucre.edu.co</p>
+                    <p><i class="fas fa-clock"></i> <strong>Horario de atención:</strong> Lunes a viernes de 8:00 AM a 12:00 M y de 2:00 PM a 6:00 PM</p>
+                    
+                    <div class="redes-sociales">
+                        <h4>Síguenos en nuestras redes sociales:</h4>
+                        <a href="https://www.facebook.com/share/1AYETujtvD/?mibextid=wwXIfr"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="https://www.instagram.com/evolsistrop?igsh=amtlMmZhYmMyYTg5"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="http://www.youtube.com/@jorgemg839"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN SECCIÓN: CONTACTO -->
+        </main>
+        
+        <aside>
+            <h2>Enlaces de interés</h2>
+            <ul>
+                <li><a href="https://www.unisucre.edu.co" target="_blank">Universidad de Sucre</a></li>
+                <li><a href="https://www.unisucre.edu.co/facultad/educacionyciencias" target="_blank">Facultad de Educación y Ciencias</a></li>
+                <li><a href="https://minciencias.gov.co" target="_blank">Ministerio de Ciencia, Tecnología e Innovación</a></li>
+                <li><a href="https://www.humboldt.org.co" target="_blank">Instituto Humboldt</a></li>
+                <li><a href="https://www.redcolsi.org" target="_blank">Red Colombiana de Semilleros de Investigación</a></li>
+            </ul>
+        </aside>
+    </div>
+    
+<footer>
+  <div class="container">
+    <p style="font-weight: bold;">&copy; 2025 Semillero de Investigación en Evolución y Sistemática Tropical - Universidad de Sucre</p>
+    <p style="font-weight: bold;">Todos los derechos reservados</p>
+    <div class="firma">
+      <p class="firma-autor">Diseñado y desarrollado por Ramos B. J.</p>
+      <a href="https://www.iucnredlist.org/es/species/22678379/188319595" target="_blank" style="display: inline-block;">
+        <img src="img/firma.png" alt="Firma de Ramos B. J." class="firma-imagen">
+      </a>
+    </div>
+  </div>
+</footer>
+    
+    <script>
+        function toggleContenido(id) {
+            const contenido = document.getElementById(id);
+            const boton = document.querySelector(`.boton-expandir[onclick="toggleContenido('${id}'); return false;"]`);
+
+            if (contenido.style.display === "none") {
+                contenido.style.display = "block";
+                boton.textContent = "Leer menos";
+            } else {
+                contenido.style.display = "none";
+                boton.textContent = "Leer más";
+             }
+}
+    </script>
+</body>
+</html>
+
+
+                
+
+            
+             
+
+            
+
